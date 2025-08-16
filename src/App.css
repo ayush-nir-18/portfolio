@@ -1,3 +1,173 @@
 html{
     scroll-behavior: smooth;
 }
+
+/* 3. ADD THESE STYLES TO YOUR GLOBAL CSS FILE (globals.css, index.css, or App.css) */
+
+/* Hide default cursor globally */
+* {
+  cursor: none !important;
+}
+
+/* Custom Wave Cursor Styles */
+.wave-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: -20px;
+  transition: transform 0.1s ease, opacity 0.3s ease;
+}
+
+.wave-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #00d4ff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: waveExpand 1.5s ease-out infinite;
+  box-shadow: 0 0 10px #00d4ff;
+}
+
+.wave-ring:nth-child(2) {
+  animation-delay: 0.3s;
+  border-color: #ff006e;
+  box-shadow: 0 0 10px #ff006e;
+}
+
+.wave-ring:nth-child(3) {
+  animation-delay: 0.6s;
+  border-color: #8338ec;
+  box-shadow: 0 0 10px #8338ec;
+}
+
+.wave-ring:nth-child(4) {
+  animation-delay: 0.9s;
+  border-color: #ffbe0b;
+  box-shadow: 0 0 10px #ffbe0b;
+}
+
+.cursor-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(255,255,255,0.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Animation Keyframes */
+@keyframes waveExpand {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.8);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    box-shadow: 0 0 25px rgba(255,255,255,1);
+  }
+}
+
+/* Hover effect particles */
+.wave-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #00d4ff;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat 2s ease-out forwards;
+  box-shadow: 0 0 8px #00d4ff;
+  z-index: 9998;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+  }
+}
+
+/* Click ripple effect */
+.click-ripple {
+  position: fixed;
+  border: 3px solid #ff006e;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: clickExpand 0.8s ease-out forwards;
+  box-shadow: 0 0 20px #ff006e;
+  z-index: 9998;
+}
+
+@keyframes clickExpand {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Enhanced hover effects for interactive elements */
+button:hover ~ .wave-cursor,
+a:hover ~ .wave-cursor,
+.button:hover ~ .wave-cursor {
+  transform: scale(1.5);
+}
+
+button:hover ~ .wave-cursor .wave-ring,
+a:hover ~ .wave-cursor .wave-ring,
+.button:hover ~ .wave-cursor .wave-ring {
+  animation-duration: 0.8s;
+  border-width: 3px;
+}
+
+button:hover ~ .wave-cursor .cursor-center,
+a:hover ~ .wave-cursor .cursor-center,
+.button:hover ~ .wave-cursor .cursor-center {
+  animation-duration: 1s;
+  background: #ffbe0b;
+  box-shadow: 0 0 20px #ffbe0b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wave-cursor {
+    display: none; /* Hide on mobile devices */
+  }
+  
+  * {
+    cursor: auto !important; /* Restore default cursor on mobile */
+  }
+}
